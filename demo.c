@@ -28,6 +28,10 @@ int main(void)
 	 *
 	 * Note: endianess affects the interpretation of our VMSTEP *and* the
 	 * layout of the VM's memory (= read/write operations)!
+	 * It is important to either disable alignment or properly align the
+	 * fields in the VMSTEP struct such that no padding is introduced
+	 * between fields. Otherwise trcview will not decode the struct
+	 * correctly.
 	 */
 	TRACE* trace = TRACEOpen("demo.trc", format, vmstep_def, sizeof(VMSTEP),
 			offsetof(VMSTEP, pc), sizeof(step.pc),
